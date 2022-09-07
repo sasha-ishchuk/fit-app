@@ -1,0 +1,339 @@
+/* GENERAL STYLE */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: auto;
+}
+
+body{
+    min-height: 100%;
+    min-width: 1024px;
+
+    background:
+            linear-gradient(
+                    rgba(0, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.7)),
+            #ae00ff url('https://i.pinimg.com/originals/5f/5e/aa/5f5eaa4774d2db0006e8452774b748e1.jpg')
+            50% 50% no-repeat ;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    position: static;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    body {
+        left: 50%;
+        margin-left: -512px; /* 50% */
+    }
+}
+
+/* HEADER */
+.header{
+    /*font-family: Georgia, serif;*/
+    text-align: left;
+    padding-bottom: 5px;
+
+    /*border-bottom: 3px solid aquamarine;*/
+    color: #ae00ff;
+    font-size: 40px;
+    background-color: transparent;
+
+    width: 100%;
+    height: auto;
+    top: 0;
+}
+
+/* FOOTER */
+.footer{
+    text-align: center;
+    padding: 15px;
+    bottom: 0;
+
+    color: #ae00ff;
+    font-family: Arial, serif;
+    text-transform: lowercase;
+    font-size: 12px;
+
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* GENERAL PAGE CONTENT STYLE */
+.content{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* BUTTON STYLE */
+/* From uiverse.io, by @menezes11 - MODIFIED */
+.btn {
+    position: relative;
+    padding: 1em 1.8em;
+    outline: none;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #ae00ff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 15px;
+    overflow: hidden;
+    transition: 0.2s;
+    /*border-radius: 20px;*/
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.btn:hover {
+    box-shadow: 0 0 10px #ae00ff, 0 0 25px #001eff, 0 0 50px #ae00ff;
+    transition-delay: 0.6s;
+}
+
+.btn span {
+    position: absolute;
+}
+
+.btn span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ae00ff);
+}
+
+.btn:hover span:nth-child(1) {
+    left: 100%;
+    transition: 0.7s;
+}
+
+.btn span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #001eff);
+}
+
+.btn:hover span:nth-child(3) {
+    right: 100%;
+    transition: 0.7s;
+    transition-delay: 0.35s;
+}
+
+.btn span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #ae00ff);
+}
+
+.btn:hover span:nth-child(2) {
+    top: 100%;
+    transition: 0.7s;
+    transition-delay: 0.17s;
+}
+
+.btn span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #001eff);
+}
+
+.btn:hover span:nth-child(4) {
+    bottom: 100%;
+    transition: 0.7s;
+    transition-delay: 0.52s;
+}
+
+.btn:active {
+    background: #ae00af;
+    background: linear-gradient(to top right, #ae00af, #001eff);
+    color: #bfbfbf;
+    box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+    transition: 0.1s;
+}
+
+.btn:active span:nth-child(1),
+span:nth-child(2),
+span:nth-child(2),
+span:nth-child(2) {
+    transition: none;
+    transition-delay: unset;
+}
+
+/* SIGN IN | SIGN UP FORMS */
+/* from freefrontend.com, by Marco Biedermann  - MODIFIED */
+.align {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.align--start {
+     align-self: flex-start;
+ }
+
+.align--end {
+     align-self: flex-end;
+ }
+
+.form_field {
+     margin-bottom: 1rem;
+ }
+
+input {
+    outline: 0;
+    padding: .5rem 1rem;
+    border: 2px solid #242c37;
+    border-radius: 999px;
+    background-color: transparent;
+    text-align: center;
+}
+
+input::placeholder {
+    color: #000;
+}
+
+input [type="email"],
+input [type="password"] {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    background-position: 1rem 50%;
+}
+
+.grid {
+    margin: 0 auto;
+    max-width: 25rem;
+    width: 100%;
+}
+
+h2 {
+    font-size: 2.75rem;
+    font-weight: 100;
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+}
+
+a, p {
+    color: #000;
+}
+
+.form {
+    box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+/*  MESSAGES STYLE  */
+.message {
+    color: darkred;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.error_message {
+    color: darkred;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+
+/* ERROR PAGE STYLE */
+/* from freefrontend.com, by Robin Selmer - MODIFIED */
+.noise {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    opacity: .02;
+}
+
+.overlay {
+    pointer-events: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background:
+            repeating-linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0) 0,
+                    rgba(0, 0, 0, 0.3) 50%,
+                    rgba(0, 0, 0, 0) 100%);
+    background-size: auto 4px;
+    z-index: 1;
+}
+
+.overlay::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 120%;
+    background-image: linear-gradient(
+            0deg,
+            transparent 0%,
+            mediumpurple 2%,
+            mediumpurple 3%,
+            mediumpurple 3%,
+            transparent 100%);
+    background-repeat: no-repeat;
+    animation: scan 10s linear 0s infinite;
+}
+
+@keyframes scan {
+    0%        { background-position: 0 -100vh; }
+    35%, 100% { background-position: 0 100vh; }
+}
+
+.terminal {
+    box-sizing: inherit;
+    position: absolute;
+    height: 100%;
+    width: 1000px;
+    max-width: 100%;
+    padding: 4rem;
+    text-transform: uppercase;
+}
+
+.output {
+    color: #ae00ff;
+    font-size: 28px;
+    text-transform: uppercase;
+    text-shadow:
+            0 0 1px mediumpurple,
+            0 0 2px rgba(255, 255, 255, 0.8);
+}
+
+.output::before {
+    content: "> ";
+}
+
+.error_code {
+    color: white;
+    font-size: 46px;
+    text-transform: uppercase;
+}

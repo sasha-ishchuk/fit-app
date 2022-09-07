@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+
+    <div class="overlay">
+        <div class="noise">
+            <div class="terminal"></div>
+        </div>
+    </div>
+
+    <div class="error_code">
+        Error 404
+    </div>
+    <p class="output">
+        Page seems to be not existing or it was deleted
+    </p>
+
+    <form th:action="@{/}" method="get">
+        <button class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Back to home page
+        </button>
+    </form>
+</div>
+</body>
+</html>

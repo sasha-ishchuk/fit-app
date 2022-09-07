@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>FitApp | s.a.sh.a</title>
+  <script type="text/javascript">
+    setInterval(function() {
+      var div = document.querySelector("#counter");
+      var count = div.textContent * 1 - 1;
+      div.textContent = count;
+      if (count <= 0) {
+        window.location.href = "/user";
+      }
+    }, 1000);
+  </script>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+  <div class="error_code" style="margin-bottom: 20px">
+    Hello, it's me, Sasha
+  </div>
+  <div class="output">
+    Let's change the background style in:
+  </div>
+  <div class="error_code" id="counter">
+    10
+  </div>
+</div>
+</body>
+</html>

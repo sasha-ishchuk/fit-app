@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+    <form th:action="@{/user/} + ${id} + @{/todo-list/tasks}" method="post">
+        <div class="row">
+            <div class="column-container">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="column">
+                    <div class="column-title">
+                        <b>Tasks</b>
+                    </div>
+                    <div class="task">
+                        <div th:each="task : ${tasks}">
+                            <div th:if="${task.user} == ${user}">
+<!--                                <div th:if="${task.user} == ${#request.remoteUser}">-->
+                                    <div id="tasks">
+                                        <strong th:text="${task.title}"></strong>
+                                        <p th:text="${task.content}"></p>
+                                    </div>
+<!--                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-field">
+                        <textarea id="taskTitle" name="taskTitle" class="input-text"></textarea>
+                    </div>
+                    <div class="text-field">
+                        <textarea id="taskContent" name="taskContent" class="input-text"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button class="btn">Add task</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

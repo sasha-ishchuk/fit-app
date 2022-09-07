@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+  <div class="align" style="background: #bfbfbf; opacity: 0.7" >
+    <div class="grid">
+      <div class="form">
+
+        <h2>Sign up</h2>
+
+        <div th:if="${param.success}" class="message" style="color: forestgreen">
+          <b>Welcome in community!</b>
+        </div>
+
+        <form th:action="@{/registration}" method="post" th:object="${userDto}">
+
+          <div class="form_field">
+            <input type="text" placeholder="First name" th:field="*{firstName}"
+                   name="firstName" required="required"/>
+            <p th:if="${#fields.hasErrors('firstName')}"
+                 th:errorclass="error_message"
+                 th:errors="*{firstName}"></p>
+          </div>
+
+          <div class="form_field">
+            <input type="text" placeholder="Last name" th:field="*{lastName}"
+                   name="lastName" required="required">
+            <p th:if="${#fields.hasErrors('lastName')}"
+               th:errorclass="error_message"
+               th:errors="*{lastName}"></p>
+          </div>
+
+          <div class="form_field">
+            <input type="email" placeholder="E-mail" th:field="*{email}"
+                   name="email" required="required"/>
+            <p th:if="${#fields.hasErrors('email')}"
+               th:errorclass="error_message"
+               th:errors="*{email}"></p>
+          </div>
+
+          <div class="form_field">
+            <input type="password" placeholder="Password" th:field="*{password}"
+                   name="password" required="required"/>
+            <p th:if="${#fields.hasErrors('password')}"
+               th:errorclass="error_message"
+               th:errors="*{password}"></p>
+          </div>
+
+          <div class="form_field">
+            <input type="password" placeholder="Confirm password" th:field="*{passwordConfirm}"
+                   name="passwordConfirm" required="required"/>
+            <p th:if="${#fields.hasErrors('passwordConfirm')}"
+               th:errorclass="error_message"
+               th:errors="*{passwordConfirm}"></p>
+          </div>
+
+          <button class="btn" style="color: black">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Sign up
+          </button>
+        </form>
+        <p>Already registered? <a th:href="@{/login}">Sign in</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

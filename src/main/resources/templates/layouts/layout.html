@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+    <!--  header-fragment  -->
+    <header class="header">
+        <a th:text="${name}" />
+    </header>
+
+    <!--  content-fragment  -->
+    <div layout:fragment="content">
+        <p>Body contents</p>
+    </div>
+
+    <!--  footer-fragment  -->
+    <footer class="footer">
+        &copy; s.a.sh.a
+    </footer>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+    <button class="btn" onclick="window.location.href='https://www.linkedin.com/in/sasha-ishchuk/';">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span> Welcome in my world
+    </button>
+
+    <form th:action="@{/registration}" method="get">
+        <button class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Sign up
+        </button>
+    </form>
+
+    <form th:action="@{/login}" method="get">
+        <button class="btn">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span> Sign in
+        </button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,316 @@
+/* GENERAL STYLE */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: auto;
+}
+
+body{
+    min-height: 100%;
+    min-width: 1024px;
+    background: black;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    position: static;
+    overflow: hidden;
+}
+
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+    body {
+        left: 50%;
+        margin-left: -512px; /* 50% */
+    }
+}
+
+/* HEADER */
+.header{
+    text-align: left;
+    padding-bottom: 5px;
+
+    /*color: #ae00ff;*/
+    color: royalblue;
+    font-size: 40px;
+    background-color: transparent;
+
+    width: 100%;
+    height: auto;
+    top: 0;
+}
+
+/* FOOTER */
+.footer{
+    text-align: center;
+    padding: 15px;
+    bottom: 0;
+
+    color: #e02eba;
+    font-family: Arial, serif;
+    text-transform: lowercase;
+    font-size: 12px;
+
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* GENERAL PAGE CONTENT STYLE */
+.content{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* BUTTON STYLE */
+/* From uiverse.io, by @menezes11 - MODIFIED */
+.btn {
+    position: relative;
+    padding: 0.6em 1.2em;
+    outline: none;
+    border: 1px solid transparent;
+    background: transparent;
+    color: #e02eba;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: Arial, serif;
+}
+
+.btn:hover {
+    box-shadow: 0 0 10px #e02eba, 0 0 25px #e02eba, 0 0 50px #e02eba;
+    transition-delay: 0.6s;
+}
+
+.btn span {
+    position: absolute;
+}
+
+.btn span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e02eba);
+}
+
+.btn:hover span:nth-child(1) {
+    left: 100%;
+    transition: 0.7s;
+}
+
+.btn span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #e02eba);
+}
+
+.btn:hover span:nth-child(3) {
+    right: 100%;
+    transition: 0.7s;
+    transition-delay: 0.35s;
+}
+
+.btn span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, #ae00ff);
+}
+
+.btn:hover span:nth-child(2) {
+    top: 100%;
+    transition: 0.7s;
+    transition-delay: 0.17s;
+}
+
+.btn span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(360deg, transparent, #e02eba);
+}
+
+.btn:hover span:nth-child(4) {
+    bottom: 100%;
+    transition: 0.7s;
+    transition-delay: 0.52s;
+}
+
+.btn:active {
+    background: #ae00af;
+    background: linear-gradient(to top right, #ae00af, #001eff);
+    color: #bfbfbf;
+    box-shadow: 0 0 8px #ae00ff, 0 0 8px #e02eba, 0 0 8px #ae00ff;
+    transition: 0.1s;
+}
+
+.btn:active span:nth-child(1),
+span:nth-child(2),
+span:nth-child(2),
+span:nth-child(2) {
+    transition: none;
+    transition-delay: unset;
+}
+
+/* NAVBAR */
+/* From https://www.w3schools.com/ - MODIFIED */
+/* Navbar container */
+.navbar {
+    overflow: hidden;
+    background-color: transparent;
+}
+
+/* Links inside the navbar */
+.navbar a {
+    float: left;
+    font-size: 12px;
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    overflow: hidden;
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, serif;
+}
+
+/* The dropdown container */
+.dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+/* Dropdown button */
+.dropbtn {
+    float: left;
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding-top: 0.06rem;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    color: white;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.2s;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Arial, serif;
+    border: none;
+    outline: none;
+    margin: 0;
+}
+
+.dropdown {
+    font-size: 12px;
+    border: none;
+    outline: none;
+    color: white;
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit; /* Important for vertical align on mobile phones */
+    margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: #e02eba;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: plum;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #e02eba;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.btn-topnav {
+    float: right;
+    font-size: 16px;
+    padding: 8px 24px;
+}
+
+/* BMI chart style */
+.table_form {
+    box-shadow: 0 0 8px #e02eba, 0 0 8px #ae00ff, 0 0 8px #e02eba;
+    text-align: center;
+    padding: 10px 10px;
+    background: transparent;
+    margin-top: 20px;
+}
+
+table{
+    background-color: white;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+th, tr{
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #000000;
+    border-style: solid;
+}
+
+tr:hover{
+    background-color: #e02eba;
+}
+
+.table_name{
+    position: relative;
+    padding: 0.6em 1.2em;
+    outline: none;
+    background: transparent;
+    color: #e02eba;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: Arial, serif;
+    font-size: 18px;
+    font-weight: bold;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user_layout}" >
+<head>
+  <meta charset="UTF-8">
+  <title>FitApp | s.a.sh.a</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+  <div class="table_name"> Body Mass Index</div>
+  <div class="table_form" id="content"></div>
+</div>
+</body>
+</html>
+
+<script type="text/javascript">
+  // count the BMI from height(cm) & weight(kg)
+  function countBMI(weight, height) {
+    // get the height(m)
+    let height_m = height / 100;
+    return (weight/Math.pow(height_m, 2)).toFixed(1);
+  }
+
+  // create BMI chart for some height/weight values
+  function getBMITable (){
+    let BMIChart = [];
+    const a = 24;
+    const b = 22;
+
+    // declare array
+    for (let i = 0; i< a; i++) {
+      for(let j = 0; j< b; j++) {
+        BMIChart[i] = [];
+      }
+    }
+    // insert '0' elements to array
+    for (let i = 0; i< a; i++) {
+      for(let j = 0; j< b; j++) {
+        BMIChart[i][j] = 0;
+      }
+    }
+    BMIChart[0][1] = 41;
+    BMIChart[1][0] = 140;
+
+    // insert BMI values to array
+    for (let i = 0; i < BMIChart.length; i++) {
+      for (let j = 0; j < BMIChart.length - 2; j++) {
+        if (i === 0 && j > 1) {
+          BMIChart[i][j] = BMIChart[i][j - 1] + 5;
+        }
+        if (j === 0 && i > 1) {
+          BMIChart[i][j] = BMIChart[i - 1][j] + 2.5;
+        }
+      }
+    }
+    for (let i = 0; i < BMIChart.length; i++) {
+      for (let j = 0; j < BMIChart.length - 2; j++) {
+        if (i > 0 && j > 0) {
+          BMIChart[i][j] = countBMI(BMIChart[0][j], BMIChart[i][0]);
+        }
+      }
+    }
+
+    for (let i = 0; i < BMIChart.length; i++) {
+      for (let j = 0; j < BMIChart.length - 2; j++) {
+        BMIChart[0][j].toFixed(1);
+      }
+    }
+    return BMIChart;
+  }
+
+  let data = getBMITable();
+
+  function getCells(data, type) {
+    return data.map(cell => `<${type}>${cell}</${type}>`).join('');
+  }
+
+  function createBody(data) {
+    return data.map(row => `<tr>${getCells(row , 'td')}</tr>`).join('');
+  }
+
+  function createTable(data) {
+    // get the headings (first row) from all rows
+    const [head_row, ...rows] = data;
+    // language=HTML
+    return `<table>
+                <thead>${getCells(head_row, 'th')}</thead>
+                <tbody>${createBody(rows)}</tbody>
+            </table>`;
+  }
+  let bmi = document.querySelector('#content');
+  bmi.insertAdjacentHTML('beforeend', createTable(data));
+</script>
