@@ -33,9 +33,10 @@ The application includes functionalities such as:
    * Registration with first/last name, email and password
    * Password confirmation in registration process
    * ***Remember me*** button on login page
-   * Possibility to change password (***Forgot password*** button) 
-* Login as **admin**
 * Error page for nonexistent pages in application
+* User page (empty for now)
+* BMI chart
+* ToDo list
 * *TO BE CONTINUED...*
 ---
 
