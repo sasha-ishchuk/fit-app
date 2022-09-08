@@ -87,6 +87,12 @@
             <version>1.6.0</version>
         </dependency>
 
+        <!--	commons-lang3, need in RetroController		-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
         <!--	spring-thymeleaf	-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

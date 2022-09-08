@@ -4,7 +4,7 @@
 
 Application to track your daily tasks (workouts also) which allows you to 
 keep your routine/health/fitness/nutrition/diet information in one place. 
-For now include: BMI calculator, BMI chart & task planner (todo list).
+For now include: BMI chart & task planner (todo list).
 
 > NOTE: ***FitApp*** development started 24.08.2022 - it's **IN PROCESS FOR NOW**
 
@@ -13,34 +13,47 @@ For now include: BMI calculator, BMI chart & task planner (todo list).
 ## Table of Contents
 1. [General information](#1-general-information)
     - [Scope of functionalities](#11-scope-of-functionalities)
-2. [Technologies](#2-technologies)
-3. [Requirements](#3-requirements)
-    * [MySQL properties](#31-mysql-propertie)
-4. [Install](#4-install)
-5. [Run](#5-run)
-6. [How to use](#6-how-to-use)
+2. [Endpoints](#2-endpoints)
+3. [Technologies](#3-technologies)
+4. [Requirements](#4-requirements)
+    * [MySQL properties](#41-mysql-propertie)
+5. [Install](#5-install)
+6. [Run](#6-run)
+7. [How to use](#7-how-to-use)
+8. [Contact](#8-contact)
 ---
 
 ## 1. General information
+
+#### *SWAGGER UI: http://localhost:7777/swagger-ui/*
+
 This project was written in Java and Spring,
 the development of which I'm going to finish in next few weeks. 
 The program is a fully web-based application.
 
 ### 1.1. Scope of functionalities
-The application includes functionalities such as:
+**The application includes functionalities such as:**
 
 * Registration and login **user** accounts
    * Registration with first/last name, email and password
    * Password confirmation in registration process
    * ***Remember me*** button on login page
 * Error page for nonexistent pages in application
+
+**Features in progress:**
 * User page (empty for now)
 * BMI chart
 * ToDo list
-* *TO BE CONTINUED...*
+
+####  *TO BE CONTINUED...*
+
+---
+## 2. Endpoints
+####  *TO BE CONTINUED...*
+
 ---
 
-## 2. Technologies
+## 3. Technologies
 * **Java** version: 17
 * **Maven** version: 3.8.1
 * **SpringBoot** version: 2.7.2
@@ -48,13 +61,13 @@ The application includes functionalities such as:
 * **Thymeleaf** template engine
 ---
 
-## 3. Requirements
+## 4. Requirements
 For building and running the application you need:
 * JDK 17
 * Maven 3
 * MySQL
 
-### 3.1. MySQL properties
+### 4.1. MySQL properties
 > **NOTE**: before you start, you need to create **"fitapp_db"** schema in your 
 > MySQL Workbench - all tables will be created by application automatically
 
@@ -75,14 +88,14 @@ For building and running the application you need:
 >```
 ---
 
-## 4. Install
+## 5. Install
 To install the application follow the instruction below:
 * Open the project in your IDE
 * Go to Maven toolbar
 * Execute *install* option in the *Lifecycle* menu
 ---
 
-## 5. Run
+## 6. Run
 
 **There are several ways to run a Spring application on your local machine**.
 1. Open the project in your IDE and execute the main method in the *FitApplication.java* class
@@ -124,10 +137,15 @@ java -jar fit-app-0.0.1-SNAPSHOT.jar
 > ```
 ---
 
-## 6. How to use
+## 7. How to use
 After running ***FitApp*** will start on:
 http://localhost:7777
 
 >**NOTE**: if you choose another port while run the application
 > from terminal or change port in *application.properties* file,
 > go to: http://localhost:[your port]
+---
+
+## 8. Contact
+* [LinkedIn](https://www.linkedin.com/in/sasha-ishchuk/)
+* sasha.ishchuk@gmail.com

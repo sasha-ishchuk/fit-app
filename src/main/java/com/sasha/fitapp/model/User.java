@@ -8,6 +8,7 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -40,12 +41,12 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_tasks",
-            joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "task_id", referencedColumnName = "id") }
-    )
-    private List<Task> tasks = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(
+//            name = "user_tasks",
+//            joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
+//            inverseJoinColumns = { @JoinColumn(name = "task_id", referencedColumnName = "id") }
+//    )
+//    private List<Task> tasks = new ArrayList<>();
+
 }

@@ -1,24 +1,27 @@
 package com.sasha.fitapp.controller;
 
-import com.mysql.cj.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import com.sasha.fitapp.model.Task;
 import com.sasha.fitapp.model.User;
 import com.sasha.fitapp.service.TaskService;
 import com.sasha.fitapp.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final TaskService taskService;
 
@@ -33,7 +36,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public String getUserPage(@PathVariable(name = "id") long id){
+    public String getUserPage(@PathVariable("id") long id){
         return "user";
     }
 
@@ -48,26 +51,30 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}/todo-list")
-    public String getToDoList(@PathVariable(name = "id") long id, Model model){
+    public String getToDoList(@PathVariable("id") long id, Model model){
         List<Task> tasksByCreatedTime = taskService.getTaskByCreatedTime();
+
+        tasksByCreatedTime.removeIf(task -> task.getUser().getId() != id);
+
         model.addAttribute("tasks", tasksByCreatedTime);
-        model.addAttribute("user", userService.findUserById(id));
         model.addAttribute("id", id);
 
         return "todo-list";
     }
 
-    @PostMapping("/user/{id}/todo-list/tasks")
-    public String addTaskToList(@PathVariable(name = "id") long id, Principal principal, Model model,
-                                @RequestParam(name = "taskTitle") String userTaskTitle,
-                                @RequestParam(name = "taskContent") String userTaskContent){
+    @PostMapping( "/user//{id}/todo-list/tasks")
+    public String addTaskToList(@PathVariable(name = "id") long id, Model model,
+                                @RequestParam(name = "taskTitle", required = false) String userTaskTitle,
+                                @RequestParam(name = "taskContent", required = false) String userTaskContent){
 
         User currentUser = userService.findUserById(id);
-        List<Task> userTasks = currentUser.getTasks();
+//        String currentUserEmail = currentUser.getEmail();
+//        model.addAttribute("userEmail", currentUserEmail);
+
+        List<Task> userTasks = new ArrayList<>();
 
         LocalDateTime localDateTime = LocalDateTime.now();
-
-        if(!StringUtils.isNullOrEmpty(userTaskContent)){
+        if(StringUtils.isNotEmpty(userTaskTitle) && StringUtils.isNotEmpty(userTaskContent)){
             userTasks.add(getTask(userTaskTitle, userTaskContent, localDateTime, currentUser, false));
         }
 
@@ -75,10 +82,11 @@ public class UserController {
         model.addAttribute("taskContent", userTaskContent);
 
         if(!userTasks.isEmpty()){
-            taskService.addTasks(userTasks);
+            logger.info("Saved {}", taskService.addTasks(userTasks));
         }
+        model.addAttribute("tasks", userTasks);
 
-        return "redirect:/user/" + id + "/todo-list/tasks";
+        return "redirect:/user/" + id + "/todo-list";
     }
 
     private Task getTask(String title, String content, LocalDateTime created, User user, boolean isDone){

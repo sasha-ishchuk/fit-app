@@ -21,12 +21,12 @@ public class TaskService {
     }
 
     public Task addTask(Task task){
-        logger.info("Saving {}", task);
+        logger.info("Save {}", task);
         return taskRepository.save(task);
     }
 
     public List<Task> addTasks(List<Task> tasks) {
-        logger.info("Saving {}", tasks);
+        logger.info("Save {}", tasks);
         return taskRepository.saveAll(tasks);
     }
 

@@ -7,10 +7,7 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "tasks")
@@ -38,7 +35,7 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "task_for_users",
+            name = "user_tasks",
             joinColumns = { @JoinColumn(name = "task_id", referencedColumnName = "id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }
     )

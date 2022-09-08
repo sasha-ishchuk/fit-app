@@ -6,40 +6,29 @@
     <meta charset="UTF-8">
     <title>FitApp | s.a.sh.a</title>
 </head>
-
 <body>
 <div class="content" layout:fragment="content">
-    <form th:action="@{/user/} + ${id} + @{/todo-list/tasks}" method="post">
-        <div class="row">
-            <div class="column-container">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-                <div class="column">
-                    <div class="column-title">
-                        <b>Tasks</b>
-                    </div>
-                    <div class="task">
-                        <div th:each="task : ${tasks}">
-                            <div th:if="${task.user} == ${user}">
-<!--                                <div th:if="${task.user} == ${#request.remoteUser}">-->
-                                    <div id="tasks">
-                                        <strong th:text="${task.title}"></strong>
-                                        <p th:text="${task.content}"></p>
-                                    </div>
-<!--                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-field">
-                        <textarea id="taskTitle" name="taskTitle" class="input-text"></textarea>
-                    </div>
-                    <div class="text-field">
-                        <textarea id="taskContent" name="taskContent" class="input-text"></textarea>
-                    </div>
+    <div class="table_name" style="margin-bottom: 20px">ToDo list</div>
+    <form th:action="@{/user/__${id}__/todo-list/tasks}" method="post">
+        <div class="task-container" style="overflow-y:scroll;">
+                <div th:each="task : ${tasks}" class="task" id="tasks">
+<!--                    <div th:if="${userEmail} == ${#request.remoteUser}">-->
+                        <strong th:text="${task.title}"></strong>
+                        <p th:text="${task.content}" style="color: white"></p>
+<!--                    </div>-->
                 </div>
             </div>
-            <div class="button-container">
-                <button class="btn">Add task</button>
-            </div>
+        <div style="display: flex;
+                    justify-content: space-around">
+        <div class="text-field" style="margin-left: 16px">
+            <textarea id="taskTitle" name="taskTitle" class="input-text" placeholder="Title"></textarea>
+        </div>
+        <div class="text-field">
+            <textarea id="taskContent" name="taskContent" class="input-text" placeholder="Task description"></textarea>
+        </div>
+        </div>
+        <div class="btn-confirm">
+            <button class="btn" style="font-size: 18px">Add task</button>
         </div>
     </form>
 </div>

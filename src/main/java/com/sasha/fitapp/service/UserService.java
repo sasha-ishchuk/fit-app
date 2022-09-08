@@ -46,7 +46,7 @@ public class UserService implements UserServiceInterface{
             role = checkRoleExist();
         }
         user.setRoles(List.of(role));
-        logger.info("Saving {}", user);
+        logger.info("Save {}", user);
         return userRepository.save(user);
     }
 
@@ -57,7 +57,7 @@ public class UserService implements UserServiceInterface{
 
     @Override
     public User findUserById(long id){
-        return userRepository.findById(id);
+        return userRepository.findById(id).orElseThrow();
     }
 
     @Override
