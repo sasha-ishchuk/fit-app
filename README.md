@@ -43,8 +43,7 @@ The program is a fully web-based application.
     * Add task
     * Edit task
     * Delete task
-* Error page for nonexistent pages/context paths in application
-  (for not handled exceptions to :ghost:)
+* Error page for nonexistent pages/context paths in application :ghost:
 
 #### Features in progress:
 * User page (empty for now)
