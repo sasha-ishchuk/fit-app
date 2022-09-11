@@ -20,10 +20,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 20)
+    @Column(length = 50)
     private String title;
 
-    @Column(length = 200)
+    @Column(length = 500)
     private String content;
 
     @Column
@@ -39,5 +39,8 @@ public class Task {
             joinColumns = { @JoinColumn(name = "task_id", referencedColumnName = "id") },
             inverseJoinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") }
     )
+    @ToString.Exclude
     private User user;
+
+
 }

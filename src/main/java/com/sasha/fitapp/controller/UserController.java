@@ -1,10 +1,10 @@
 package com.sasha.fitapp.controller;
 
-import org.apache.commons.lang3.StringUtils;
 import com.sasha.fitapp.model.Task;
 import com.sasha.fitapp.model.User;
 import com.sasha.fitapp.service.TaskService;
 import com.sasha.fitapp.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,8 +15,6 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -62,18 +60,16 @@ public class UserController {
         return "todo-list";
     }
 
-    @PostMapping( "/user//{id}/todo-list/tasks")
+    @PostMapping( "/user/{id}/todo-list/tasks")
     public String addTaskToList(@PathVariable(name = "id") long id, Model model,
                                 @RequestParam(name = "taskTitle", required = false) String userTaskTitle,
                                 @RequestParam(name = "taskContent", required = false) String userTaskContent){
 
-        User currentUser = userService.findUserById(id);
-//        String currentUserEmail = currentUser.getEmail();
-//        model.addAttribute("userEmail", currentUserEmail);
-
         List<Task> userTasks = new ArrayList<>();
 
         LocalDateTime localDateTime = LocalDateTime.now();
+        User currentUser = userService.findUserById(id);
+
         if(StringUtils.isNotEmpty(userTaskTitle) && StringUtils.isNotEmpty(userTaskContent)){
             userTasks.add(getTask(userTaskTitle, userTaskContent, localDateTime, currentUser, false));
         }
@@ -87,6 +83,21 @@ public class UserController {
         model.addAttribute("tasks", userTasks);
 
         return "redirect:/user/" + id + "/todo-list";
+    }
+
+    @DeleteMapping("/user/{id}/delete")
+    public String deleteUserAccount(@PathVariable("id") long id, Model model){
+        model.addAttribute("id", id);
+
+        List<Task> tasksByCreatedTime = taskService.getTaskByCreatedTime();
+        tasksByCreatedTime.removeIf(task -> task.getUser().getId() != id);
+
+        logger.info("Deleted tasks {}", tasksByCreatedTime);
+        taskService.deleteTasksByUser(tasksByCreatedTime);
+
+        logger.info("Deleted user {}", userService.findUserById(id));
+        userService.deleteUser(id);
+        return "redirect:/?success";
     }
 
     private Task getTask(String title, String content, LocalDateTime created, User user, boolean isDone){

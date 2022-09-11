@@ -9,23 +9,32 @@
 <body>
 <div class="content" layout:fragment="content">
     <div class="table_name" style="margin-bottom: 20px">ToDo list</div>
+    <div th:if="${param.success}" class="message" style="color: crimson; font-size: 20px; margin-bottom: 20px">
+        <b>Task was successfully deleted!</b>
+    </div>
     <form th:action="@{/user/__${id}__/todo-list/tasks}" method="post">
-        <div class="task-container" style="overflow-y:scroll;">
-                <div th:each="task : ${tasks}" class="task" id="tasks">
-<!--                    <div th:if="${userEmail} == ${#request.remoteUser}">-->
-                        <strong th:text="${task.title}"></strong>
-                        <p th:text="${task.content}" style="color: white"></p>
-<!--                    </div>-->
-                </div>
+        <div class="task-container" style="overflow-y:scroll">
+
+            <div th:each="task : ${tasks}" class="task" id="tasks">
+                <strong th:text="${task.title}"></strong>
+                <p th:text="${task.content}" style="color: white"></p>
+                <a th:href="@{/user/__${id}__/task/__${task.id}__/edit}" class="task-href" style="margin-left: auto">
+                    Edit
+                </a>
+                <a th:href="@{/user/__${id}__/task/__${task.id}__/delete}" class="task-href" >
+                    Delete
+                </a>
             </div>
+        </div>
+
         <div style="display: flex;
                     justify-content: space-around">
-        <div class="text-field" style="margin-left: 16px">
-            <textarea id="taskTitle" name="taskTitle" class="input-text" placeholder="Title"></textarea>
-        </div>
-        <div class="text-field">
-            <textarea id="taskContent" name="taskContent" class="input-text" placeholder="Task description"></textarea>
-        </div>
+            <div class="text-field" style="margin-left: 16px">
+                <textarea id="taskTitle" name="taskTitle" class="input-text" placeholder="Title"></textarea>
+            </div>
+            <div class="text-field">
+                <textarea id="taskContent" name="taskContent" class="input-text" placeholder="Task description"></textarea>
+            </div>
         </div>
         <div class="btn-confirm">
             <button class="btn" style="font-size: 18px">Add task</button>

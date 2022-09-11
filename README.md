@@ -12,11 +12,11 @@ For now include: BMI chart & task planner (todo list).
 
 ## Table of Contents
 1. [General information](#1-general-information)
-    - [Scope of functionalities](#11-scope-of-functionalities)
+   - [Scope of functionalities](#11-scope-of-functionalities)
 2. [Endpoints](#2-endpoints)
 3. [Technologies](#3-technologies)
 4. [Requirements](#4-requirements)
-    * [MySQL properties](#41-mysql-propertie)
+   - [MySQL properties](#41-mysql-properties)
 5. [Install](#5-install)
 6. [Run](#6-run)
 7. [How to use](#7-how-to-use)
@@ -27,30 +27,65 @@ For now include: BMI chart & task planner (todo list).
 
 #### *SWAGGER UI: http://localhost:7777/swagger-ui/*
 
-This project was written in Java and Spring,
+This project is writing in Java and Spring,
 the development of which I'm going to finish in next few weeks. 
 The program is a fully web-based application.
 
 ### 1.1. Scope of functionalities
-**The application includes functionalities such as:**
 
-* Registration and login **user** accounts
+#### The application includes functionalities such as:
+* Registration and login **user** account
    * Registration with first/last name, email and password
    * Password confirmation in registration process
    * ***Remember me*** button on login page
-* Error page for nonexistent pages in application
+* Deletion **user** account
+* ToDo list
+    * Add task
+    * Edit task
+    * Delete task
+* Error page for nonexistent pages/context paths in application
+  (for not handled exceptions to :ghost:)
 
-**Features in progress:**
+#### Features in progress:
 * User page (empty for now)
 * BMI chart
-* ToDo list
+* ToDo list (I want to add possibility to mark task as *DONE*)
 
 ####  *TO BE CONTINUED...*
 
 ---
 ## 2. Endpoints
-####  *TO BE CONTINUED...*
+### App Controller:
+1. GET ```/``` - get view of the **main page**
+2. GET ```/login``` - get view of **login(sign in) form**
+3. GET ```/redirection``` - get view of **redirection page**, witch shows for 7 sec 
+after user logging in, exist to give user short info from *s.a.sh.a* (it's me :cat:)
 
+### Registration Controller:
+1. GET ```/registration``` - get view of **registration(sign up) form**
+2. POST ```/registration``` - get **valid user's data** (REQUIRED request params: first name, 
+last name, e-mail, password, password confirmation)
+
+### User Controller:
+1. GET ```/user``` - used to **redirect to user account**
+2. GET ```/user/{id}``` - get view of **user account page** (Path variable **id** - 
+id of current log in user)
+3. DELETE ```/user/{id}/delete``` - delete **user page** (Path variable **id** -
+id of current log in user)
+4. GET ```/bmi``` - get view of **BMI table**
+5. GET ```/todo-list``` - used to **redirect to user's ToDo list**
+6. GET ```/user/{id}/todo-list``` - get view of **user's ToDo list** (Path variable **id** -
+id of current log in user)
+7. POST ```/user/{id}/todo-list/tasks``` - **add task** to user's ToDo list (Path variable **id** -
+id of current log in user)
+
+### Task Controller:
+1. GET ```/user/{id}/task/{taskId}/edit``` - get view of **edit task page** (Path variables: **id** -
+id of current log in user, **taskId** - id of task to edit)
+2. POST ```/user/{id}/task/{taskId}/edit``` - **edit task** (Path variables: **id** -
+id of current log in user, **taskId** - id of task to edit)
+3. GET ```/user/{id}/task/{taskId}/delete``` - **delete task** (Path variables: **id** -
+   id of current log in user, **taskId** - id of task to delete)
 ---
 
 ## 3. Technologies

@@ -46,7 +46,7 @@ public class UserService implements UserServiceInterface{
             role = checkRoleExist();
         }
         user.setRoles(List.of(role));
-        logger.info("Save {}", user);
+        logger.info("Saving {}", user);
         return userRepository.save(user);
     }
 
@@ -66,6 +66,15 @@ public class UserService implements UserServiceInterface{
         return users.stream().map(this::mapToUserDto).collect(Collectors.toList());
     }
 
+    public void deleteUser(long id){
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    public String getEmail(){
+        return user.getEmail();
+    }
+
     private Role checkRoleExist() {
         Role role = new Role();
         role.setName("ROLE_USER");
@@ -75,10 +84,4 @@ public class UserService implements UserServiceInterface{
     private UserDto mapToUserDto(User user) {
         return new UserDto(user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword());
     }
-
-    @Override
-    public String getEmail(){
-        return user.getEmail();
-    }
-
 }

@@ -8,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -33,7 +32,7 @@ public class User {
     @Column(nullable = false, length = 64, unique = true)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },

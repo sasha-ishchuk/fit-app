@@ -9,6 +9,10 @@
 
 <body>
 <div class="content" layout:fragment="content">
+    <div th:if="${param.success}" class="message" style="color: crimson">
+        <b>Account has been successfully deleted!</b>
+    </div>
+
     <button class="btn" onclick="window.location.href='https://www.linkedin.com/in/sasha-ishchuk/';">
         <span></span>
         <span></span>

@@ -316,7 +316,6 @@ tr:hover{
 }
 
 /* To-Do List Style */
-
 .task-container {
     padding: 2px;
     border: 2px solid #ae00af;
@@ -325,7 +324,7 @@ tr:hover{
     display: flex;
     flex-direction: column;
     width: 600px;
-    height: 200px;
+    min-height: 200px;
     max-width: 600px;
     max-height: 400px;
     box-shadow: deeppink 0 8px 24px;
@@ -345,8 +344,14 @@ tr:hover{
     align-items: center;
 }
 
-.task:hover {
-    background-color: plum;
+.task-href {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.task-href:hover {
+    color: deeppink;
 }
 
 .text-field {
@@ -368,9 +373,13 @@ tr:hover{
     background-color: black;
     border-radius: 12px;
     box-shadow: deeppink 0 8px 14px;
-    overflow-y: auto;
-    overflow-x: hidden;
     color: white;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.input-text::-webkit-scrollbar{
+    display: none;
 }
 
 strong {
@@ -383,11 +392,6 @@ strong {
 
 strong:after{
     content: ':';
-}
-
-placeholder{
-    color: white;
-    font-family: Arial, serif;
 }
 
 .btn-confirm {
