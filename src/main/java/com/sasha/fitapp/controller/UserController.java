@@ -1,19 +1,25 @@
 package com.sasha.fitapp.controller;
 
+import com.sasha.fitapp.model.Ingredient;
+import com.sasha.fitapp.model.Recipe;
 import com.sasha.fitapp.model.Task;
 import com.sasha.fitapp.model.User;
+import com.sasha.fitapp.service.IngredientService;
+import com.sasha.fitapp.service.RecipeService;
 import com.sasha.fitapp.service.TaskService;
 import com.sasha.fitapp.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,10 +28,14 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final TaskService taskService;
+    private final RecipeService recipeService;
+    private final IngredientService ingredientService;
 
-    public UserController(UserService userService, TaskService taskService) {
+    public UserController(UserService userService, TaskService taskService, RecipeService recipeService, IngredientService ingredientService) {
         this.userService = userService;
         this.taskService = taskService;
+        this.recipeService = recipeService;
+        this.ingredientService = ingredientService;
     }
 
     @GetMapping("/user")
@@ -38,76 +48,56 @@ public class UserController {
         return "user";
     }
 
-    @GetMapping("/bmi")
-    public String getBMITable(){
-        return "bmi";
-    }
+//    public static String LOAD_DIR = System.getProperty("user.dir") + "/users_photo";
+//
+//    @PostMapping("/load") public String uploadImage(@RequestParam("image") MultipartFile file,
+//                                                    Model model) throws IOException {
+//        StringBuilder fileName = new StringBuilder();
+//        Path fileNameAndPath = Paths.get(LOAD_DIR, file.getOriginalFilename());
+//        fileName.append(file.getOriginalFilename());
+//        Files.write(fileNameAndPath, file.getBytes());
+//        model.addAttribute("msg", "Loaded photo: " + fileName);
+//        return "user";
+//    }
 
     @GetMapping("/todo-list")
     public String redirectToDoList(Principal principal){
         return "redirect:/user/" + getCurrentLoginUserId(principal) + "/todo-list";
     }
 
-    @GetMapping("/user/{id}/todo-list")
-    public String getToDoList(@PathVariable("id") long id, Model model){
-        List<Task> tasksByCreatedTime = taskService.getTaskByCreatedTime();
-
-        tasksByCreatedTime.removeIf(task -> task.getUser().getId() != id);
-
-        model.addAttribute("tasks", tasksByCreatedTime);
-        model.addAttribute("id", id);
-
-        return "todo-list";
+    @GetMapping("/recipes")
+    public String redirectToRecipes(Principal principal){
+        return "redirect:/user/" + getCurrentLoginUserId(principal) + "/recipes";
     }
 
-    @PostMapping( "/user/{id}/todo-list/tasks")
-    public String addTaskToList(@PathVariable(name = "id") long id, Model model,
-                                @RequestParam(name = "taskTitle", required = false) String userTaskTitle,
-                                @RequestParam(name = "taskContent", required = false) String userTaskContent){
-
-        List<Task> userTasks = new ArrayList<>();
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-        User currentUser = userService.findUserById(id);
-
-        if(StringUtils.isNotEmpty(userTaskTitle) && StringUtils.isNotEmpty(userTaskContent)){
-            userTasks.add(getTask(userTaskTitle, userTaskContent, localDateTime, currentUser, false));
-        }
-
-        model.addAttribute("taskTitle", userTaskTitle);
-        model.addAttribute("taskContent", userTaskContent);
-
-        if(!userTasks.isEmpty()){
-            logger.info("Saved {}", taskService.addTasks(userTasks));
-        }
-        model.addAttribute("tasks", userTasks);
-
-        return "redirect:/user/" + id + "/todo-list";
+    @GetMapping("/bmi")
+    public String getBMITable(){
+        return "bmi";
     }
 
     @DeleteMapping("/user/{id}/delete")
     public String deleteUserAccount(@PathVariable("id") long id, Model model){
         model.addAttribute("id", id);
 
-        List<Task> tasksByCreatedTime = taskService.getTaskByCreatedTime();
-        tasksByCreatedTime.removeIf(task -> task.getUser().getId() != id);
+        List<Task> tasks = taskService.getTaskByCreatedTime();
+        tasks.removeIf(task -> task.getUser().getId() != id);
+        logger.info("Deleted user tasks {}", tasks);
+        taskService.deleteTasks(tasks);
 
-        logger.info("Deleted tasks {}", tasksByCreatedTime);
-        taskService.deleteTasksByUser(tasksByCreatedTime);
+        List<Ingredient> ingredients = ingredientService.getAllIngredients();
+        ingredients.removeIf(ingredient -> ingredient.getRecipe().getUser().getId() != id);
+        logger.info("Deleted user ingredients {}", ingredients);
+        ingredientService.deleteIngredients(ingredients);
+
+        List<Recipe> recipes = recipeService.getAllRecipes();
+        recipes.removeIf(recipe -> recipe.getUser().getId() != id);
+        logger.info("Deleted user recipes {}", recipes);
+        recipeService.deleteRecipes(recipes);
+
 
         logger.info("Deleted user {}", userService.findUserById(id));
         userService.deleteUser(id);
         return "redirect:/?success";
-    }
-
-    private Task getTask(String title, String content, LocalDateTime created, User user, boolean isDone){
-        Task task = new Task();
-        task.setTitle(title);
-        task.setContent(content);
-        task.setCreated(created);
-        task.setUser(user);
-        task.setDone(isDone);
-        return task;
     }
 
     private long getCurrentLoginUserId(Principal principal){

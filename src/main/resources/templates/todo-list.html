@@ -12,7 +12,7 @@
     <div th:if="${param.success}" class="message" style="color: crimson; font-size: 20px; margin-bottom: 20px">
         <b>Task was successfully deleted!</b>
     </div>
-    <form th:action="@{/user/__${id}__/todo-list/tasks}" method="post">
+    <form th:action="@{/user/__${id}__/todo-list/task/add}" method="post">
         <div class="task-container" style="overflow-y:scroll">
 
             <div th:each="task : ${tasks}" class="task" id="tasks">
@@ -27,13 +27,14 @@
             </div>
         </div>
 
-        <div style="display: flex;
-                    justify-content: space-around">
+        <div style="display: flex; justify-content: space-around">
             <div class="text-field" style="margin-left: 16px">
-                <textarea id="taskTitle" name="taskTitle" class="input-text" placeholder="Title"></textarea>
+                <textarea id="taskTitle" name="taskTitle" class="input-text"
+                          placeholder="Title" style="margin-top: 20px;"></textarea>
             </div>
             <div class="text-field">
-                <textarea id="taskContent" name="taskContent" class="input-text" placeholder="Task description"></textarea>
+                <textarea id="taskContent" name="taskContent" class="input-text"
+                          placeholder="Task description" style="margin-top: 20px;"></textarea>
             </div>
         </div>
         <div class="btn-confirm">

@@ -9,6 +9,15 @@
 
 <body>
 <div class="content" layout:fragment="content">
+    <form th:action="@{/load}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="file" name="image" accept="image/*">
+        </div>
+        <button type="submit" class="btn">Load photo</button>
+    </form>
+<!--    <img th:src="@{/resorces/users_photo/__${loadImage}__}"/>-->
+    <span th:if="${msg != null}" th:text="${msg}" style="color: white"></span>
+
 
 
 

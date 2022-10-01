@@ -1,12 +1,9 @@
 package com.sasha.fitapp.repository;
 
-import com.sasha.fitapp.model.User;
+import com.sasha.fitapp.model.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-
-    User findByEmail(String email);
-
+public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 }

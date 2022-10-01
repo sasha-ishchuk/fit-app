@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -39,6 +41,14 @@ public class User {
             inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") }
     )
     private List<Role> roles = new ArrayList<>();
+
+//    @OneToMany
+//    @JoinTable(
+//            name = "user_recipes",
+//            joinColumns = { @JoinColumn(name = "user_id", referencedColumnName = "id") },
+//            inverseJoinColumns = { @JoinColumn(name = "recipe_id", referencedColumnName = "id") }
+//    )
+//    private List<Recipe> recipes = new ArrayList<>();
 
 //    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @JoinTable(

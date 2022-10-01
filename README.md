@@ -43,13 +43,17 @@ The program is a fully web-based application.
     * Add task
     * Edit task
     * Delete task
-* Error page for nonexistent pages/context paths in application
-  (for not handled exceptions to :ghost:)
+* Recipe book
+    * Add recipe (with possibility to add image via link)
+        * Add ingredient
+        * Add nutrition value
+* Error page for nonexistent pages/context paths in application :ghost:
 
 #### Features in progress:
 * User page (empty for now)
 * BMI chart
 * ToDo list (I want to add possibility to mark task as *DONE*)
+* Recipe book (edit/delete recipe, its ingredient & nutrition value)
 
 ####  *TO BE CONTINUED...*
 
@@ -74,18 +78,31 @@ id of current log in user)
 id of current log in user)
 4. GET ```/bmi``` - get view of **BMI table**
 5. GET ```/todo-list``` - used to **redirect to user's ToDo list**
-6. GET ```/user/{id}/todo-list``` - get view of **user's ToDo list** (Path variable **id** -
-id of current log in user)
-7. POST ```/user/{id}/todo-list/tasks``` - **add task** to user's ToDo list (Path variable **id** -
-id of current log in user)
+6. GET ```/recipes``` - used to **redirect to user's Recipe book**
 
 ### Task Controller:
-1. GET ```/user/{id}/task/{taskId}/edit``` - get view of **edit task page** (Path variables: **id** -
+1. GET ```/user/{id}/todo-list``` - get view of **user's ToDo list** (Path variable **id** -
+   id of current log in user)
+2. POST ```/user/{id}/todo-list/task/add``` - **add task** to user's ToDo list (Path variable **id** -
+   id of current log in user)
+3. GET ```/user/{id}/task/{taskId}/edit``` - get view of **edit task page** (Path variables: **id** -
 id of current log in user, **taskId** - id of task to edit)
-2. POST ```/user/{id}/task/{taskId}/edit``` - **edit task** (Path variables: **id** -
+4. POST ```/user/{id}/task/{taskId}/edit``` - **edit task** (Path variables: **id** -
 id of current log in user, **taskId** - id of task to edit)
-3. GET ```/user/{id}/task/{taskId}/delete``` - **delete task** (Path variables: **id** -
+5. GET ```/user/{id}/task/{taskId}/delete``` - **delete task** (Path variables: **id** -
    id of current log in user, **taskId** - id of task to delete)
+
+### Recipe Controller:
+1. GET ```/user/{id}/recipes``` - get view of **user's Recipe book** (Path variable **id** -
+   id of current log in user)
+2. POST ```/user/{id}/recipes/add``` - **add recipe** to user's Recipe book (Path variable **id** -
+   id of current log in user)
+3. GET ```/user/{id}/recipes/{recipeId}/add-info``` - get view of **add ingredients & nutrition value page** (Path variables: **id** -
+   id of current log in user, **recipeId** - id of recipe to add ingredient/nutrition value)
+4. POST ```/user/{id}/recipes/{recipeId}/ingredient/add``` - **add ingredient** (Path variables: **id** -
+   id of current log in user, **recipeId** - id of recipe to add ingredient)
+5. POST ```/user/{id}/recipes/{recipeId}/nutrition-value/add``` - **add nutrition value** (Path variables: **id** -
+   id of current log in user, **recipeId** - id of recipe to add nutrition value)
 ---
 
 ## 3. Technologies

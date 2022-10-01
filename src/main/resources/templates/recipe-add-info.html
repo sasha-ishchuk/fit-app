@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user_layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+
+  <div class="row">
+    <div  class="column-1" style="width: 50%; display: flex;
+            justify-content: center; align-items: center; box-shadow: none; border: none">
+      <div class="form-name">Add ingredient</div>
+
+      <form th:action="@{/user/__${id}__/recipes/__${recipeId}__/ingredient/add}" method="post" style="width: 300px">
+        <div style="display: flex; flex-direction: column">
+          <div class="text-field">
+            <textarea class="input-text" id="ingredientDecs" name="ingredientDecs" placeholder="Name"></textarea>
+          </div>
+          <div class="text-field">
+            <textarea class="input-text" id="ingredientAmount" name="ingredientAmount" placeholder="Amount"></textarea>
+          </div>
+          <select id="unitOfMeasure" name="unitOfMeasure" class="text-field">
+            <option class="input-text" th:each="unit : ${T(com.sasha.fitapp.model.UnitOfMeasurement).values()}"
+                    th:value="${unit}" th:text="${unit.displayValue}"></option>
+          </select>
+        </div>
+        <div style="display: flex; width: 100px; margin-left: 60px">
+          <div class="btn-confirm" style="margin-top: 2rem">
+            <button class="btn" style="font-size: 14px; color: deeppink">Add</button>
+          </div>
+          <div class="btn-confirm" style="margin-top: 2rem">
+            <button th:href="@{/user/__${id}__/recipes}" class="btn" style="font-size: 14px; color: crimson">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div  class="column-1" style="width: 50%; display: flex;
+            justify-content: center; align-items: center; box-shadow: none; border: none">
+      <div class="form-name">Add nutrition info</div>
+
+      <form th:action="@{/user/__${id}__/recipes/__${recipeId}__/nutrition-value/add}" method="post" style="width: 300px">
+        <div style="display: flex; flex-direction: column">
+          <div class="text-field">
+            <textarea class="input-text" id="recipeCalories" name="recipeCalories" placeholder="Calories"></textarea>
+          </div>
+          <div class="text-field">
+            <textarea class="input-text" id="recipeProteins" name="recipeProteins" placeholder="Proteins"></textarea>
+          </div>
+          <div class="text-field">
+            <textarea class="input-text" id="recipeFats" name="recipeFats" placeholder="Fats"></textarea>
+          </div>
+          <div class="text-field">
+            <textarea class="input-text" id="recipeCarbohydrates" name="recipeCarbohydrates" placeholder="Carbohydrates"></textarea>
+          </div>
+        </div>
+        <div style="display: flex; width: 100px; margin-left: 60px">
+          <div class="btn-confirm" style="margin-top: 2rem">
+            <button class="btn" style="font-size: 14px; color: deeppink">Add</button>
+          </div>
+          <div class="btn-confirm" style="margin-top: 2rem">
+            <button th:href="@{/user/__${id}__/recipes}" class="btn" style="font-size: 14px; color: crimson">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

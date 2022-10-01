@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/user_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FitApp | s.a.sh.a</title>
+</head>
+
+<body>
+<div class="content" layout:fragment="content">
+
+    <div class="table_name" style="margin-top: 10px">Recipe book</div>
+
+    <form th:action="@{/user/__${id}__/recipes/add}" method="post" class="row">
+        <div class="column" id="col1" style="overflow-y:scroll">
+            <div th:each="recipe : ${recipes}" class="row" id="recipes">
+                <div class="column-1" style="overflow-y:scroll">
+                    <p class="recipe-title" th:text="${recipe.title}"></p>
+                    <div class="row" style="height: 60px;">
+                        <div class="col-big" style="width: 35%">
+                            <p class="recipe-label">Preparation time (minutes): </p>
+                        </div>
+                        <div class="col-small">
+                            <p th:text="${recipe.prepareTime}" style="color: white"></p>
+                        </div>
+                        <div class="col-big" style="width: 30%">
+                            <p class="recipe-label">Cooking time (minutes): </p>
+                        </div>
+                        <div class="col-small">
+                            <p th:text="${recipe.cookTime}" style="color: white"></p>
+                        </div>
+                        <div class="col-big" style="width: 14%">
+                            <p class="recipe-label">Servings: </p>
+                        </div>
+                        <div class="col-small">
+                            <p th:text="${recipe.servings}" style="color: white"></p>
+                        </div>
+                    </div>
+                    <div class="row" style="height: auto">
+                        <div class="column" style="width: 50%">
+                            <p class="recipe-label" style="padding-left: 10px; font-size: 20px">Cooking process: </p>
+                            <p th:text="${recipe.cookProcess}" style="padding-left: 10px; color: white; background-color: black"></p>
+                        </div>
+                        <div class="column" style="width: 50%">
+                            <img th:src="${recipe.imageUrl}">
+                        </div>
+                    </div>
+                </div>
+                <div class="column-2">
+                    <div class="dropdown-label" style="margin-top: 30px">
+                        <span style="margin-left: 32px">Ingredients</span>
+                        <div class="dropdown-form">
+                            <div class="row" th:each="ingredient : ${ingredients}" id="ingredients" style="height: 50px">
+                                <div class="col-label-big" th:text="${ingredient.description}"></div>
+                                <div class="col-label-small" th:text="${ingredient.amount}"></div>
+                                <div class="col-label-small" th:text="${ingredient.unitOfMeasurement}"
+                                     style="font-size: 10px; padding-top: 5px; margin-left: 15px"></div>
+                            </div>
+                            <div class="button-label">
+                                <a th:href="@{/user/__${id}__/recipes/__${recipe.id}__/add-info}"
+                                       class="btn" style="font-size: 12px; text-decoration: none; margin-top: 20px">
+                                        Add more
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-label">
+                        <span style="margin-left: 18px">Nutrition info</span>
+                        <div class="dropdown-form">
+                            <div class="row" th:each="nutritionValue : ${nutritionValues}" id="nutritionValue">
+                                <div class="col-label-small" style="width: 70%">
+                                    <p class="recipe-label">Calories: </p>
+                                    <p class="recipe-label">Proteins: </p>
+                                    <p class="recipe-label">Fats: </p>
+                                    <p class="recipe-label">Carbohydrates: </p>
+                                </div>
+                                <div class="col-label-small" style="width: 30%; margin-left: 15px">
+                                    <p th:text="${nutritionValue.calories}" style="color: white"></p>
+                                    <p th:text="${nutritionValue.proteins}" style="color: white"></p>
+                                    <p th:text="${nutritionValue.fats}" style="color: white"></p>
+                                    <p th:text="${nutritionValue.carbohydrates}" style="color: white"></p>
+                                </div>
+                            </div>
+                            <div class="button-label">
+                                <a th:href="@{/user/__${id}__/recipes/__${recipe.id}__/add-info}"
+                                   class="btn" style="font-size: 12px; text-decoration: none; margin-top: 20px">
+                                    Add
+                                </a>
+                            </div>
+                            <p style="color: white; display: flex; justify-content: center">You can add it just once!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column" id="col2" style="margin-top: 10px">
+            <div style="display: flex; flex-direction: column">
+                <div class="text-field-recipe">
+                    <textarea id="recipeTitle" name="recipeTitle" class="input-text" placeholder="Title"></textarea>
+                </div>
+                <div class="text-field-recipe">
+                    <textarea id="recipeImage" name="recipeImage" class="input-text" placeholder="Link to image"></textarea>
+                </div>
+                <div class="text-field-recipe">
+                    <textarea id="prepareTime" name="prepareTime" class="input-text" placeholder="Preparation time"></textarea>
+                </div>
+                <div class="text-field-recipe">
+                    <textarea id="cookTime" name="cookTime" class="input-text" placeholder="Cook time"></textarea>
+                </div>
+                <div class="text-field-recipe">
+                    <textarea id="servings" name="servings" class="input-text" placeholder="How many portions?"></textarea>
+                </div>
+                <div class="text-field-recipe" style="height: 130px">
+                    <textarea id="recipeProcess" name="recipeProcess" class="input-text" placeholder="Cook process description"></textarea>
+                </div>
+            </div>
+            <div class="btn-confirm">
+                <button class="btn" style="font-size: 15px">Add recipe</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>

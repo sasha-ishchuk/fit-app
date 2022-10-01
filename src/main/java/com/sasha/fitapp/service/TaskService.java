@@ -34,10 +34,6 @@ public class TaskService {
         return taskRepository.findTaskByCreatedTime(localDateTime.getYear(), localDateTime.getMonthValue(), localDateTime.getDayOfMonth());
     }
 
-    public void deleteTasksByUser(List<Task> tasks){
-        taskRepository.deleteAll(tasks);
-    }
-
     public Task findById(long id){
         return taskRepository.findById(id).orElseThrow();
     }
@@ -47,7 +43,13 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
+    public void deleteTasks(List<Task> tasks){
+        logger.info("Deleting {}", tasks);
+        taskRepository.deleteAll(tasks);
+    }
+
     public void deleteTaskById(long id){
+        logger.info("Deleting TASK with id={}", id);
         taskRepository.deleteById(id);
     }
 

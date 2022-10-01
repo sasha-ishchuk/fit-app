@@ -67,6 +67,7 @@ public class UserService implements UserServiceInterface{
     }
 
     public void deleteUser(long id){
+        logger.info("Deleting USER with id={}", id);
         userRepository.deleteById(id);
     }
 
